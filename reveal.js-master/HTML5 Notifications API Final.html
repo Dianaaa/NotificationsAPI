@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>HTML5: Notifications API</title>
+
+		<meta name="description" content="A presentation about the Notifications API in HTML5">
+		<meta name="author" content="Diana Gerstenberger">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/beige.css" id="beige">
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+                    <section data-background="#EDE275">
+					<h1>HTML 5</h1>
+					<h2>Notifications API</h2>
+					<p>
+						<small>Erstellt von Diana Gerstenberger </small>
+					</p>
+                        <aside class="notes">
+							Meine Präsi ist über die HTML5 Notifications API.
+						</aside>
+                </section>
+                </section>
+
+                <section id="fragments">
+						<h2>Notifications</h2>
+						<p class="fragment"> API für Benachrichtigungen der End-Nutzer</p>
+						<p class="fragment">... damit können Ereignisse bzw. Vorgänge gemeldet werden</p>
+                        <p class="fragment">... alamiert Nutzer außerhalb des Kontexts einer Webseite.</p>
+                    
+						<aside class="notes">
+							Die Notifications API ist eine Schnittstelle um den End-Nutzer über bestimmte Ereignisse bzw Vorgänge, die ihn betreffen, zu benachrichtigen. Dafür wird der Nutzer außerhalb des Kontexts einer Webseite alamiert....Beispiel...
+						</aside>
+                    <p>
+                      <script> function notifyMe() {
+  // Let's check if the browser supports notifications
+  if (!("Notification" in window)) {
+    alert("This browser does not support desktop notification");
+  }
+
+  // Let's check whether notification permissions have already been granted
+  else if (Notification.permission === "granted") {
+    // If it's okay let's create a notification
+    var notification = new Notification("Hi there!");
+  }
+
+  // Otherwise, we need to ask the user for permission
+  else if (Notification.permission !== 'denied') {
+    Notification.requestPermission(function (permission) {
+      // If the user accepts, let's create a notification
+      if (permission === "granted") {
+        var notification = new Notification("Hi there!");
+      }
+    });
+  }
+
+  // At last, if the user has denied notifications, and you 
+  // want to be respectful there is no need to bother them any more.
+}
+                </script>
+                    </p>
+                    <p>
+                    
+                     <button onclick="notifyMe();">Click me</button>
+                    </p>
+					</section>
+                    
+                
+                <section>
+                    <h2>Beispiele</h2>
+                        <ul>
+                            <li>Eingang einer eMail</li>
+                            <li>Erinnerung an einen Termin</li>
+                            <li>Etc.</li>
+                    </ul>
+                    <aside class="notes">
+							Beispiele dafür sind unter anderen der Eingang einer eMail oder auch die Erinnerung an einen Termin oder an einen Geburtstag. 
+						</aside>
+				</section>
+                
+                <section>
+                <section>
+					<h2>Darstellung</h2>
+					<p>
+						Meldungen können in verschiedenen Formen/Plätzen auftreten:
+					</p>
+                    <ul>
+                            <li>Ecke des Displays</li>
+                            <li>im Bereich des Chromes des Nutzerbevollmächtigten</li>
+                            <li>auf dem Home-Bildschirm eines mobilen Gerätes</li>
+                    </ul>
+                    <aside class="notes">
+							Dargestellt werden die Notifications oftmals in der Ecke des Displays, wie man an dem Beispiel gerade eben sehen konnte. Aber auch im Bereich des Chromes des Nutzers oder auf dem Home-Bildschirm eines mobilen Gerätes können die Notifications angezeigt werden. zB wird auf meinem Handy jeden Tag per Benachrichtigung angezeigt wer an dem Tag Geburtstag hat.
+						</aside>
+				</section>
+                <section>
+					<h2>Darstellung</h2>
+                    <p>Die API reagiert flexibel auf die Präsentationsoptionen des Nutzers.</p>
+                    <aside class="notes">
+						Diese Spezifikation definiert jedoch nicht, wie der Nutzerbevollmächtigte die Benachrichtigung angezeigt haben möchte, denn die API ist entwickelt wurden, um flexibel auf die Präsentationsoptionen zu reagieren.
+						</aside>
+				</section>
+                </section>    
+                
+                <section>
+					<h2>Konstruktor</h2>
+				
+                  <p>Notification.Notification()</p>
+                    <aside class="notes">
+							Aufgerufen werden die Benachrichtigungen durch den Kontruktor Notification.Notification().
+						</aside>
+				</section>
+
+				<section>
+					<section>
+						<h2>Eigenschaften</h2>   
+						<p>Jede Benachrichtigung hat: Titel, Richtung, Sprache, Herkunft</p>
+                        <p>Jede Benachrichtigung kann haben: Körper, ID, Symbol URL, Symbol Bild</p>
+                        <aside class="notes">
+							Die Eigenschaften einer Benachrichtigung können in statische Eigenschaften und instanzierte Eigenschaften unterschieden werden. Jede Notification beinhaltet auf jeden Fall einen Titel, eine Richtung, eine definierte Sprache und eine Herkunft. Aber auch ein Körper, eine ID und ein Symbol mit der dazugehörigen URL und dem Bild könnten angezeigt werden.
+						</aside>
+					</section>
+                    
+					<section>
+						<h2>Statische Eigenschaften</h2>
+					<br>	<h4>Notification.permission</h4>
+                    <ul>
+                            <li>default (Nichterfüllung)</li>
+                            <li>denied (Verweigerung)</li>
+                            <li>granted (Genehmigung)</li>
+                    </ul>
+				<aside class="notes">
+						Benachrichtigungen können nur angezeigt werden, wenn der Nutzer seine Erlaubnis dazu gegeben hat. Da gibt es drei Eigenschaften: default (Nichterfüllung), denied (Verweigerung) und granted (Genehmigung). 
+						</aside>
+					</section>
+                    
+                    <section>
+						<h2>Instanzierte Eigenschaften</h2>
+                        <br>
+                        <h4>Notification.title</h4>
+                        <h4>Notification.dir</h4>
+                        <h4>Notification.lang</h4>
+                        <aside class="notes">
+							Zu den instanzierten Eigenschaften gehören der Titel und der Text der Notification, sowie die Sprache.
+						</aside>
+					</section>
+                    
+                     <section>
+						<h2>Instanzierte Eigenschaften</h2>
+                         <br>
+						<h4>Notification.body</h4>
+                        <h4>Notification.tag</h4>
+                        <h4>Notification.icon</h4>
+                         <aside class="notes">
+							Aber auch der Körper, die ID und das URL des Bildes, welches als Symbol verwendet werden kann, können in einer Notification eingefügt werden. 
+						</aside>
+					</section>
+                    
+                     <section>
+						<h2>Instanzierte Eigenschaften</h2>
+                         <br>
+						<h4>Notification.data</h4>
+                        <h4>Notification.silent</h4>
+                         <aside class="notes">
+							Mit ... kann eine strukturierte Kopie der Daten wiedergegeben werden und mit ... kann spezifiert werden, ob die Benachrichtigung leise, daher ohne Klang oder Vibration widergegeben werden soll.
+						</aside>
+					</section>
+				</section>
+
+					<section>
+						<h2>Methoden</h2>
+						<br>
+                 <h4>Notification.requestPermission()</h4>
+                        <h4>Notification.close()</h4>
+						<aside class="notes">
+							Auch die Methoden einer Benachrichtigung können in statische Eigenschaften und instanzierte Methoden unterschieden werden. Zu den statischen Methoden gehört ..., die sich die Erlaubnis des Nutzers, die Benachrichtigung anzuzeigen, holt. Mit ... kann das Programm eine Benachrichtigung automatisch schließen.
+						</aside>
+					</section>
+                
+                <section>
+                <section>
+					<h2>Ablauf</h2>
+                    <p>Schritt 1</p>
+                     <p>Überprüfung ob Browser Notifications unterstützt</p>
+                         <ul>
+                             <li>Nein: alert "nicht unterstützt"</li>
+                             <li>Ja: Schritt 2</li>
+                         </ul>
+                    <aside class="notes">
+							Der Ablauf einer Notification kann in drei Schritte unterteilt werden. Im 1. Schritt wird überprüft, ob der Browser die Notifications unterstützt. Wenn das nicht der Fall ist, gibt es eine Warnung. Ansonsten geht es weiter zu Schritt 2.
+						</aside>
+                    </section>
+                         <section>
+                             <h2>Ablauf</h2>
+                             <p>Schritt 2</p>
+                            <p>Überprüfung ob die Erlaubnis für Notifications gewährt ist</p>
+                         <ul>
+                             <li>Nein: um Erlaubnis fragen</li>
+                             <ul>
+                             <li>wenn akzeptiert: Schritt 3</li>
+                             </ul>
+                             <li>Ja: Schritt 3</li>
+                         </ul>
+                             <aside class="notes">
+							Hier wird nun überprüft ob es eine gewährleistete Erlaubnis für Notifications gibt. Wenn nicht, wird der Nutzer um Erlaubnis gefragt (Bild?!). Sobald eine Erlaubnis vorhanden ist, geht es weiter zu Schritt 3. 
+						</aside>
+                    </section>
+                    <section>
+                        <h2>Ablauf</h2>
+                        <p>Schritt 3</p>
+                            <p>Erstellung der Notification</p>
+                    <aside class="notes">
+							Hier, im letzten Schritt, wird die Notification erstellt.
+						</aside>
+                    </section>
+				</section>
+
+                
+				<section data-markdown>
+					<script type="text/template">
+						## Notifications API Quelltext
+
+						```
+						function notifyMe() {
+  if (!("Notification" in window)) {
+    alert("This browser does not support desktop notification");
+  }
+  else if (Notification.permission === "granted") {
+    var notification = new Notification("Hi there!");
+  }
+  else if (Notification.permission !== 'denied') {
+    Notification.requestPermission(function (permission) {
+      if (permission === "granted") {
+        var notification = new Notification("Hi there!");
+      }
+    });
+  }
+}
+						```
+					</script>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
